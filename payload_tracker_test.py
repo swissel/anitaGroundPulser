@@ -101,13 +101,19 @@ if __name__ == '__main__':
         # DLon_a = -112. - 6.744/60.
 
         # TESTER WITH EXAMPLE NUMBERS FROM "http://gis.stackexchange.com/questions/58923/calculate-view-angle"
-        alt_p = 4000
-        DLat_p = 39.
-        DLon_p = -75.
+        # alt_p = 4000
+        alt_p = input('Enter the altitude of the pulser: ')
+        # DLat_p = 39.
+        DLat_p = input('Enter the latitude of the pulser: ')
+        # DLon_p = -75.
+        DLon_p = input('Enter the longitude of the pulser: ')
 
-        alt_a = 12000
-        DLat_a = 39.
-        DLon_a = -76.
+        # alt_a = 12000
+        alt_a = input('Enter the altitude of ANITA: ')
+        # DLat_a = 39.
+        DLat_a = input('Enter the latitude of ANITA: ')
+        # DLon_a = -76.
+        DLon_a = input('Enter the longitude of ANITA: ')
 
         print "coordinates in degrees = ", (DLat_p, DLon_p, DLat_a, DLon_a)
 
