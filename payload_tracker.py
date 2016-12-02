@@ -3,7 +3,7 @@
 # script to calculate elevation and azimuth angles from two GPS coordinates
 
 
-import matplotlib.pyplot as pyp
+#import matplotlib.pyplot as pyp
 import numpy as np
 import math as m
 import argparse
@@ -86,7 +86,7 @@ if __name__ == '__main__':
 	# --> Gives elevation angle from horizontal : 4.88 degrees
 	# 	    azimuthal angle in degrees clockwise from from N : 270.331 / -89.67
 	###############################################################################
-	# Check with Mt. Erebus from LDB should give answer that is due North and <10° in elevation
+	# Check with Mt. Erebus from LDB should give answer that is due North and <10deg in elevation
 	#
 	# bash-3.2$ python payload_tracker.py -77.516666667 167.15 3794
 	# Mt. Erebus lat  -77.516666667 lon  167.15 altitude  3794.0 m
