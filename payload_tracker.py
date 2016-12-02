@@ -85,6 +85,13 @@ if __name__ == '__main__':
         # DLon_a = -76
 	# --> Gives elevation angle from horizontal : 4.88 degrees
 	# 	    azimuthal angle in degrees clockwise from from N : 270.331 / -89.67
+	###############################################################################
+	# Check with Mt. Erebus from LDB should give answer that is due North and <10° in elevation
+	#
+	# bash-3.2$ python payload_tracker.py -77.516666667 167.15 3794
+	# Mt. Erebus lat  -77.516666667 lon  167.15 altitude  3794.0 m
+	# Gives elevation angle of 5.66 deg. from horizontal / 358.06 / -1.94  degrees CW from N
+	###############################################################################
 
 	opts = argparse.ArgumentParser(description='process commandline options')
 	
