@@ -25,7 +25,25 @@ def coord_degToECEF(lat, lon, alt):
 
     return x,y,z
 
+def greatcircle_distance(lat1, lon1, lat2, lon2):
+    # using the haversine formula
+    
+    phi1    = np.deg2rad(lat1)
+    phi2    = np.deg2rad(lat2)
+    dphi    = np.deg2rad(lat2 - lat1)
+    dlambda = np.deg2rad(lon2 - lon1)
+    
+    #R = 6378137.
+    R = 6371e3
+
+    a = pow(np.sin(dphi/2.),2.) + np.cos(phi1) * np.cos(phi2) * pow(np.sin(dlambda/2.),2.)
+    c = 2*np.arctan2(np.sqrt(a), np.sqrt(1.-a))
+    d = R * c
+    return d
+
 def distance(x, y, z, xG, yG, zG):
+    # this gives the wrong distance compared with the haversine formula
+    # do not understand why?
     (dx, dy, dz) = (x-xG, y-yG, z-zG)	
     return np.sqrt( dx**2 + dy**2 + dz**2)
 
@@ -100,9 +118,18 @@ if __name__ == '__main__':
      	opts.add_argument('anita_lat', help='Latitude of ANITA payload in +/- decimal degrees E.', type=float)
      	opts.add_argument('anita_lon', help='Longitude of ANITA payload in +/- decimal degress N.', type=float)
      	opts.add_argument('anita_alt', help='Altitude of ANITA payload in m above sea level.', type=float)
-        opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees E.', nargs='?', type=float, default=-77.853836167)
-     	opts.add_argument('pulser_lon', help='Longitude of pulser in +/- decimal degrees N.',nargs='?', type=float, default=167.202818)
-     	opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', nargs='?', type=float, default=0.019812)
+        # LDB
+	#opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees E.', nargs='?', type=float, default=-77.853836167)
+     	#opts.add_argument('pulser_lon', help='Longitude of pulser in +/- decimal degrees N.',nargs='?', type=float, default=167.202818)
+     	#opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', nargs='?', type=float, default=0.019812)
+	# WAIS
+	opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees E.', nargs='?', type=float, default=-79.465616667)
+     	opts.add_argument('pulser_lon', help='Longitude of pulser in +/- decimal degrees N.',nargs='?', type=float, default=-112.1124)
+     	opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', nargs='?', type=float, default=1775.68)
+	# Siple
+	#opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees E.', nargs='?', type=float, default=-81.652316667)
+     	#opts.add_argument('pulser_lon', help='Longitude of pulser in +/- decimal degrees N.',nargs='?', type=float, default=-149.000166667)
+     	#opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', nargs='?', type=float, default=0.019812)
 
      	args = opts.parse_args()
 
@@ -136,7 +163,13 @@ if __name__ == '__main__':
         #print "ECEF coordinates of pulser (meters) = ", (x_p, y_p, z_p)
 	#print "(dx, dy, dz): ", (x_a-x_p, y_a-y_p, z_a-z_p)
 	
-	print "Distance from ANITA to Pulser : ", distance(x_a, y_a, z_a, x_p, y_p, z_p)/1000., " km."
+	#print "Distance from ANITA to Pulser : ", distance(x_a, y_a, z_a, x_p, y_p, z_p)/1000., " km."
+	d_a = distance(x_a, y_a, z_a, x_p, y_p, z_p)
+	d_cf = greatcircle_distance(DLat_p, DLon_p, DLat_a, DLon_a)
+	dt_cf = d_cf/2.99e8 * 1000 # ms
+	dt_a = d_a/2.99e8 * 1000 # ms
+	print "Distance from ANITA to Pulser : as-crow-flies %4.2f / with altitude %4.2f km." %( d_cf/1000.,  d_a/1000.)
+	print "Arrival time at ANITA : as-crow-flies %2.2f / with altitude %2.2f ms"%(dt_cf, dt_a)
 	print "-------------------------------------------------"
 
         AzAngle = azimuthAngle(x_a, y_a, z_a, x_p, y_p, z_p)
