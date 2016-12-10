@@ -148,23 +148,21 @@ if __name__ == '__main__':
 	
      	# default pulser location is LDB near McMurdo Station
      	# you can change the default as you wish.
-     	opts.add_argument('anita_lat', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='deg[DminM[secS]]')
-     	opts.add_argument('anita_lon', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='deg[DminM[secS]]')
+     	opts.add_argument('anita_lat', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]N/S', action=HandleDegrees, metavar='anita_lat[ deg[DminM[secS]]N/S]')
+     	opts.add_argument('anita_lon', help='Longitude of ANITA payload in +/- decimal degrees E. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='anita_lon[ deg[DminM[secS]]E/W ]')
      	opts.add_argument('anita_alt', help='Altitude of ANITA payload in ft above sea level.', type=float)
         # LDB
-	#opts.add_argument('pulser_lat', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='deg[DminM[secS]]', nargs='?', default=-77.853836167)
-	#opts.add_argument('pulser_lat', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='deg[DminM[secS]]', nargs='?',  default=167.202818)
-	#opts.add_argument('pulser_lat', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='deg[DminM[secS]]', nargs='?', type=float, default=0.019812)
+	#opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees N. or DegDMinM[SecS]N/S', action=HandleDegrees, nargs='?', default=-77.853836167)
+	#opts.add_argument('pulser_lon', help='Longitude of pulser in +/- decimal degrees E. or DegDMinM[SecS]E/W', action=HandleDegrees,  nargs='?',  default=167.202818)
+	#opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', nargs='?', default=0.019812)
 	# WAIS
-	opts.add_argument('pulser_lat', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='deg[DminM[secS]]', nargs='?', default=-79.465616667)
-     	opts.add_argument('pulser_lon', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='deg[DminM[secS]]', nargs='?', default=-112.1124)
+	opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, nargs='?', default=-79.465616667)
+     	opts.add_argument('pulser_lon', help='Longitude of pulser in +/- decimal degrees E. or DegDMinM[SecS]E/W', action=HandleDegrees, nargs='?', default=-112.1124)
      	opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', nargs='?', type=float, default=1775.68)
 	# Siple
-	#opts.add_argument('pulser_lat', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='deg[DminM[secS]]', nargs='?', default=-81.652316667)
-	#opts.add_argument('pulser_lat', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='deg[DminM[secS]]', nargs='?', default=-149.000166667)
-	#opts.add_argument('pulser_lat', help='Latitude of ANITA payload in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='deg[DminM[secS]]', nargs='?', default=0.019812)
-
-
+	#opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees N. or DegDMinM[SecS]N/S', action=HandleDegrees,  nargs='?', default=-81.652316667)
+	#opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees E. or DegDMinM[SecS]E/W', action=HandleDegrees,  nargs='?', default=-149.000166667)
+	#opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', nargs='?', type=float, default=0.019812)
      	args = opts.parse_args()
 
 	alt_p = args.pulser_alt
