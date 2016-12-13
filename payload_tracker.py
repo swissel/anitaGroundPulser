@@ -21,7 +21,7 @@ class HandleDegrees(argparse.Action):
 				# must be decimal degrees already
 				setattr(namespace, self.dest, float(value)) 
 			except:
-				print "degrees must be in either decimal degrees (20.5) or degDminD[secS]N/S/E/W (20D30M00SN or 20D30MN):", value
+				print "degrees must be in either decimal degrees (20.5) or degDminD[secS]N/S/E/W (e.g. 20D30M00SN or 20D30MN):", value
 		   else:
 			mind = value.find('M', 0, -1)
 			sind = value.find('S', 0, -1)
@@ -37,9 +37,6 @@ class HandleDegrees(argparse.Action):
 			if( direction == "S" or direction == "W"):
 				decdeg *= -1.
 			setattr(namespace, self.dest, decdeg) 
-
-
-		
 
 # function to convert degrees gps coords to (x,y,z)ECEF ... altitude in meters
 def coord_degToECEF(lat, lon, alt):
@@ -152,13 +149,13 @@ if __name__ == '__main__':
      	opts.add_argument('anita_lon', help='Longitude of ANITA payload in +/- decimal degrees E. or DegDMinM[SecS]E/W', action=HandleDegrees, metavar='anita_lon[ deg[DminM[secS]]E/W ]')
      	opts.add_argument('anita_alt', help='Altitude of ANITA payload in ft above sea level.', type=float)
         # LDB
-	#opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees N. or DegDMinM[SecS]N/S', action=HandleDegrees, nargs='?', default=-77.853836167)
-	#opts.add_argument('pulser_lon', help='Longitude of pulser in +/- decimal degrees E. or DegDMinM[SecS]E/W', action=HandleDegrees,  nargs='?',  default=167.202818)
-	#opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', nargs='?', default=0.019812)
+	opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees N. or DegDMinM[SecS]N/S', action=HandleDegrees, nargs='?', default=-77.853836167)
+	opts.add_argument('pulser_lon', help='Longitude of pulser in +/- decimal degrees E. or DegDMinM[SecS]E/W', action=HandleDegrees,  nargs='?',  default=167.202818)
+	opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', type = float, nargs='?', default=0.019812)
 	# WAIS
-	opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, nargs='?', default=-79.465616667)
-     	opts.add_argument('pulser_lon', help='Longitude of pulser in +/- decimal degrees E. or DegDMinM[SecS]E/W', action=HandleDegrees, nargs='?', default=-112.1124)
-     	opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', nargs='?', type=float, default=1775.68)
+	#opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees N. or DegDMinM[SecS]E/W', action=HandleDegrees, nargs='?', default=-79.465616667)
+     	#opts.add_argument('pulser_lon', help='Longitude of pulser in +/- decimal degrees E. or DegDMinM[SecS]E/W', action=HandleDegrees, nargs='?', default=-112.1124)
+     	#opts.add_argument('pulser_alt', help='Altitude of pulser in m above sea level.', nargs='?', type=float, default=1775.68)
 	# Siple
 	#opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees N. or DegDMinM[SecS]N/S', action=HandleDegrees,  nargs='?', default=-81.652316667)
 	#opts.add_argument('pulser_lat', help='Latitude of pulser in +/- decimal degrees E. or DegDMinM[SecS]E/W', action=HandleDegrees,  nargs='?', default=-149.000166667)
